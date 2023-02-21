@@ -2,7 +2,7 @@
 
 > A docker image for running [Commitlint](https://commitlint.js.org/#/). It includes `@commitlint/cli`and  `@commitlint/config-conventional`
 
-![Docker Pulls](https://img.shields.io/docker/pulls/brpaz/docker-commitlint.svg?style=for-the-badge)
+![Docker Pulls](https://img.shields.io/docker/pulls/brpaz/commitlint.svg?style=for-the-badge)
 ![MicroBadger Layers](https://img.shields.io/microbadger/layers/brpaz/docker-commitlint?style=for-the-badge)
 ![MicroBadger Size](https://img.shields.io/microbadger/image-size/brpaz/docker-commitlint?style=for-the-badge)
 ![LICENSE](https://img.shields.io/github/license/brpaz/docker-commitlint?style=for-the-badge)

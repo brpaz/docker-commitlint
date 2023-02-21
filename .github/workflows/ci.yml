@@ -62,7 +62,7 @@ jobs:
         with:
           name: myimage
           path: /tmp/myimage.tar
-          retention-period: 1
+          retention-days: 1
 
   publish:
     needs: build
