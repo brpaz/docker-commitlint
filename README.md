@@ -2,11 +2,11 @@
 
 > A docker image for running [Commitlint](https://commitlint.js.org/#/). It includes `@commitlint/cli`and  `@commitlint/config-conventional`
 
-![Docker Pulls](https://img.shields.io/docker/pulls/brpaz/commitlint.svg?style=for-the-badge)
-![MicroBadger Layers](https://img.shields.io/microbadger/layers/brpaz/docker-commitlint?style=for-the-badge)
-![MicroBadger Size](https://img.shields.io/microbadger/image-size/brpaz/docker-commitlint?style=for-the-badge)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/brpaz/docker-commitlint/ci.yml?style=for-the-badge)](https://github.com/brpaz/docker-commitlint/actions/workflows/ci.yml)
+![Docker Image Version (latest by date)](https://img.shields.io/docker/v/brpaz/commitlint?style=for-the-badge)
+![Docker Image Size](https://img.shields.io/docker/image-size/brpaz/commitlint?style=for-the-badge)
+[![Docker Pulls](https://img.shields.io/docker/pulls/brpaz/commitlint.svg?style=for-the-badge)](https://hub.docker.com/repository/docker/brpaz/commitlint/general)
 ![LICENSE](https://img.shields.io/github/license/brpaz/docker-commitlint?style=for-the-badge)
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/brpaz/docker-commitlint/CI?style=for-the-badge)](https://github.com/brpaz/docker-commitlint)/actions/ci
 
 ## Getting Started
 
