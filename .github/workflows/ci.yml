@@ -61,8 +61,8 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: |
-            ghcr.io/${{ github.repository }}
-            ${{ github.repository }}
+            ghcr.io/brpaz/commitlint
+            brpaz/commitlint
           tags: |
             type=ref,event=branch
             type=ref,event=pr
