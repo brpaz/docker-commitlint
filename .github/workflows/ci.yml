@@ -76,14 +76,14 @@ jobs:
             org.opencontainers.image.vendor=Bruno Paz
 
       - name: Login to DockerHub
-        if: github.event_name != 'pull_request'
+        if: github.event_name == 'release' && github.event.action == 'published'
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Login to GHCR
-        if: github.event_name != 'pull_request'
+        if: github.event_name == 'release' && github.event.action == 'published'
         uses: docker/login-action@v2
         with:
           registry: ghcr.io
@@ -92,7 +92,7 @@ jobs:
 
       - name: Push to registry
         uses: docker/build-push-action@v4
-        if: github.event_name != 'pull_request'
+        if: github.event_name == 'release' && github.event.action == 'published'
         with:
           context: .
           push: true
@@ -101,17 +101,20 @@ jobs:
 
       - name: Update Changelog
         uses: stefanzweifel/changelog-updater-action@v1
+        if: github.event_name == 'release' && github.event.action == 'published'
         with:
           latest-version: ${{ github.event.release.name }}
           release-notes: ${{ github.event.release.body }}
 
       - name: Set release commit message
         id: release_commit_message
+        if: github.event_name == 'release' && github.event.action == 'published'
         run: |
           echo "commit_message=chore(release): bump version ${VERSION}" >> $GITHUB_OUTPUT
 
       - name: Commit updated Changelog and Package.json
         uses: stefanzweifel/git-auto-commit-action@v4
+        if: github.event_name == 'release' && github.event.action == 'published'
         with:
           branch: main
           commit_message: "${{ steps.release_commit_message.outputs.commit_message }}"
