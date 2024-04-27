@@ -1,0 +1,18 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.10.5/.schema/devbox.schema.json",
+  "packages": [
+    "hadolint",
+    "go-task@latest",
+    "lefthook@latest"
+  ],
+  "shell": {
+    "init_hook": [
+      "lefthook install"
+    ],
+    "scripts": {
+      "test": [
+        "echo \"Error: no test specified\" && exit 1"
+      ]
+    }
+  }
+}

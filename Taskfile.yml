@@ -1,0 +1,33 @@
+version: "3"
+
+vars:
+  TEST_IMAGE: commitlint:local-dev
+  COMMITLINT_VERSION: "19.3.0"
+
+tasks:
+  setup-env:
+    desc: "Setup local environment"
+    cmds:
+      - lefthook install
+
+  lint:
+    desc: "Runs hadolint against application dockerfile"
+    cmds:
+      - hadolint Dockerfile
+
+  build:
+    desc: "Builds the docker image"
+    cmds:
+      - |
+        docker build \
+         --build-arg COMMITLINT_VERSION={{.COMMITLINT_VERSION }} \
+         -t {{ .TEST_IMAGE }} .
+
+  test:
+    desc: "Runs a test in the image"
+    cmds:
+      - container-structure-tests
+        --image {{ .TEST_IMAGE }} \
+        --config test/structure-tests.yaml
+    deps:
+      - build
