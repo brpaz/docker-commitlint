@@ -58,7 +58,7 @@ jobs:
             COMMITLINT_VERSION: ${{ env.COMMITLINT_VERSION }}
 
       - name: Setup container structure tests
-        uses: brpaz/structure-tests-action@v1.2.0
+        uses: brpaz/structure-tests-action@1.2.0
 
       - name: Run tests
         run: |
