@@ -8,7 +8,7 @@
 [![Docker Pulls](https://img.shields.io/docker/pulls/brpaz/commitlint.svg?style=for-the-badge)](https://hub.docker.com/repository/docker/brpaz/commitlint/general)
 ![LICENSE](https://img.shields.io/github/license/brpaz/docker-commitlint?style=for-the-badge)
 
-## Getting Started
+## 🚀 Getting Started
 
 ### Installation
 
@@ -29,13 +29,13 @@ For commitlint to be able to work, you must mount your project directory in the 
 Ex:
 
 ```sh
-docker run --rm -it -v $(pwd):/code  -w /code brpaz/commitlint --edit
+docker run --rm -it -v $(pwd):/code  -w /code ghrc.io/brpaz/docker-commitlint:19.3.0 --edit
 ```
 
 Or using `stdin`:
 
 ```sh
-echo "foo" | docker -i run brpaz/commitlint
+echo "foo" | docker -i run ghrc.io/brpaz/docker-commitlint:19.3.0
 ```
 
 ## Contributing

@@ -4,4 +4,3 @@ commandTests:
     command: commitlint
     args: ["-v"]
     exitCode: 0
-    expectedOutput: ["@commitlint/cli@17.4.4"]

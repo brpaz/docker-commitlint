@@ -1,5 +1,5 @@
 # https://docs.docker.com/build/ci/github-actions/examples/
-name: CI
+name: Release
 
 on:
   workflow_dispatch:
@@ -45,7 +45,7 @@ jobs:
           labels: |
             org.opencontainers.image.title=Commitlint
             org.opencontainers.image.description=A Docker Image for Commitlint
-            org.opencontainers.image.vendor=Bruno Paz
+            org.opencontainers.image.url=https://github.com/brpaz/docker-commitlint
 
       - name: Build
         uses: docker/build-push-action@v5
