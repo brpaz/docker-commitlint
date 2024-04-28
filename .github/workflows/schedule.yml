@@ -9,6 +9,9 @@ jobs:
   check-latest-commitlint-version:
     name: Check latest commitlint version
     runs-on: ubuntu-latest
+    outputs:
+      trigger_build: ${{ steps.get-tags.outputs.trigger_build }}
+      commitlint_version: ${{ steps.get-version.outputs.commitlint_version }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -26,22 +29,22 @@ jobs:
           echo "commitlint_version=$VERSION" >> $GITHUB_OUTPUT
 
       - name: Get tags from Package registry
+        id: get-tags
         shell: bash
         run: |
           export GHCR_TOKEN=$(echo ${{ secrets.GITHUB_TOKEN }} | base64)
           export TAG=${{ steps.get-version.outputs.commitlint_version }}
 
-          echo $TAG
-
           node scripts/has-tag.js
           if [ $? -ne 1 ]; then
-            echo "exists=true" >> $GITHUB_OUTPUT
+            echo "trigger_build=true" >> $GITHUB_OUTPUT
           fi
 
-          echo "exists=false" >> $GITHUB_OUTPUT
+          echo "trigger_build=false" >> $GITHUB_OUTPUT
 
-      - name: Trigger image build
-        # if: steps.get-version.outputs.exists == 'false'
-        uses: ./.github/workflows/release.yml
-        with:
-          commitlint_version: ${{ steps.get-version.outputs.commitlint_version }}
+  trrigger-build:
+    if: needs.check-latest-commitlint-version.outputs.trigger_build == 'true'
+    needs: check-latest-commitlint-version
+    uses: brpaz/docker-commitlint/.github/workflows/release.yml@main
+    with:
+      commitlint_version: ${{ needs.check-latest-commitlint-version.outputs.commitlint_version }}
