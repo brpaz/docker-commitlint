@@ -57,14 +57,11 @@ jobs:
           build-args: |
             COMMITLINT_VERSION: ${{ env.COMMITLINT_VERSION }}
 
-      - name: Setup container structure tests
+      - name: Run container tests
         uses: brpaz/structure-tests-action@1.2.0
-
-      - name: Run tests
-        run: |
-          container-structure-test test \
-            --image ${{env.TEST_IMAGE_NAME}} \
-            --config structure-tests.yaml
+        with:
+          image: ${{env.TEST_IMAGE_NAME}}
+          configFile: structure-tests.yaml
 
       - name: Login to DockerHub
         uses: docker/login-action@v3
