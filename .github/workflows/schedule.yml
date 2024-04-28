@@ -6,9 +6,9 @@ on:
   workflow_dispatch:
 
 jobs:
-  check-npm-package:
+  check-latest-commitlint-version:
+    name: Check latest commitlint version
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -25,10 +25,12 @@ jobs:
           echo "name=commitlint_version::$VERSION" >> $GITHUB_OUTPUT
 
       - name: Get tags from Package registry
+        shell: bash
         run: |
           export GHCR_TOKEN=$(echo ${{ secrets.GITHUB_TOKEN }} | base64)
           export TAG=${{ steps.get-version.outputs.commitlint_version }}
 
+          echo $GHCR_TOKEN
           echo $TAG
 
           node scripts/has-tag.js
@@ -37,7 +39,6 @@ jobs:
           fi
 
           echo "name=exists::false" >> $GITHUB_OUTPUT
-
       - name: Trigger image build
         # if: steps.get-version.outputs.exists == 'false'
         uses: ./.github/workflows/release.yml
