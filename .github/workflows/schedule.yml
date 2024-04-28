@@ -22,7 +22,7 @@ jobs:
         id: get-version
         run: |
           VERSION=$(npm show commitlint version)
-          run: echo "name=commitlint_version::$VERSION" >> $GITHUB_OUTPUT
+          echo "name=commitlint_version::$VERSION" >> $GITHUB_OUTPUT
 
       - name: Get latest tag from Package registry
         run: |
