@@ -23,22 +23,23 @@ jobs:
         run: |
           VERSION=$(npm show commitlint version)
           echo $VERSION
-          echo "name=commitlint_version::$VERSION" >> $GITHUB_OUTPUT
+          echo "commitlint_version=$VERSION" >> $GITHUB_OUTPUT
 
       - name: Get tags from Package registry
         shell: bash
         run: |
-          GHCR_TOKEN=$(echo ${{ secrets.GITHUB_TOKEN }} | base64)
-          TAG=${{ steps.get-version.outputs.commitlint_version }}
+          export GHCR_TOKEN=$(echo ${{ secrets.GITHUB_TOKEN }} | base64)
+          export TAG=${{ steps.get-version.outputs.commitlint_version }}
 
           echo $TAG
 
           node scripts/has-tag.js
           if [ $? -ne 1 ]; then
-            echo "name=exists::true" >> $GITHUB_OUTPUT
+            echo "exists=true" >> $GITHUB_OUTPUT
           fi
 
-          echo "name=exists::false" >> $GITHUB_OUTPUT
+          echo "exists=false" >> $GITHUB_OUTPUT
+
       - name: Trigger image build
         # if: steps.get-version.outputs.exists == 'false'
         uses: ./.github/workflows/release.yml
