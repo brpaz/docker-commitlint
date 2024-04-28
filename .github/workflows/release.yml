@@ -9,6 +9,11 @@ on:
         description: "The version of commitlint to use"
         required: true
         default: "19.3.0"
+    secrets:
+      DOCKERHUB_USERNAME:
+        required: true
+      DOCKERHUB_TOKEN:
+        required: true
 
   workflow_dispatch:
     inputs:
