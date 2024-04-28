@@ -41,7 +41,8 @@ jobs:
           if [ $status -eq 2 ]; then
               echo "trigger_build=true" >> $GITHUB_OUTPUT
           elif [ $status -eq 0 ]; then
-            echo "trigger_build=false" >> $GITHUB_OUTPUT
+            echo "version already exists in registry, skipping build"
+            echo "trigger_build=true" >> $GITHUB_OUTPUT
           else
             echo "Script failed with exit status $status"
             exit $status
