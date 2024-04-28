@@ -7,7 +7,7 @@ on:
 
 jobs:
   check-latest-commitlint-version:
-    name: Check latest commitlint version
+    name: Check latest version
     runs-on: ubuntu-latest
     outputs:
       trigger_build: ${{ steps.get-tags.outputs.trigger_build }}
@@ -49,7 +49,7 @@ jobs:
           fi
 
   trrigger-build:
-    #if: needs.check-latest-commitlint-version.outputs.trigger_build == 'true'
+    if: needs.check-latest-commitlint-version.outputs.trigger_build == 'true'
     name: Build image
     needs: check-latest-commitlint-version
     permissions:
