@@ -43,7 +43,7 @@ async function run() {
 
   if (!tags.includes(TAG_TO_CHECK)) {
     console.log(`Tag ${TAG_TO_CHECK} not found in repository ${REPOSITORY}`);
-    process.exit(1);
+    process.exit(2);
   }
 }
 

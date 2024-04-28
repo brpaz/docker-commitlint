@@ -36,15 +36,22 @@ jobs:
           export TAG=${{ steps.get-version.outputs.commitlint_version }}
 
           node scripts/has-tag.js
-          if [ $? -ne 1 ]; then
-            echo "trigger_build=true" >> $GITHUB_OUTPUT
+          status=$?
+          echo $status
+          if [ $status -eq 2 ]; then
+              echo "trigger_build=true" >> $GITHUB_OUTPUT
+          elif [ $status -eq 0 ]; then
+            echo "trigger_build=false" >> $GITHUB_OUTPUT
+          else
+            echo "Script failed with exit status $status"
+            exit $status
           fi
-
-          echo "trigger_build=false" >> $GITHUB_OUTPUT
 
   trrigger-build:
     if: needs.check-latest-commitlint-version.outputs.trigger_build == 'true'
     needs: check-latest-commitlint-version
+    permissions:
+      packages: write
     uses: brpaz/docker-commitlint/.github/workflows/release.yml@main
     with:
       commitlint_version: ${{ needs.check-latest-commitlint-version.outputs.commitlint_version }}
