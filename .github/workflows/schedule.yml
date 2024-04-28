@@ -24,10 +24,12 @@ jobs:
           VERSION=$(npm show commitlint version)
           echo "name=commitlint_version::$VERSION" >> $GITHUB_OUTPUT
 
-      - name: Get latest tag from Package registry
+      - name: Get tags from Package registry
         run: |
-          GHCR_TOKEN=$(echo ${{ secrets.GITHUB_TOKEN }} | base64)
-          TAG=${{ steps.get-version.outputs.commitlint_version }}
+          export GHCR_TOKEN=$(echo ${{ secrets.GITHUB_TOKEN }} | base64)
+          export TAG=${{ steps.get-version.outputs.commitlint_version }}
+
+          echo $TAG
 
           node scripts/has-tag.js
           if [ $? -ne 1 ]; then
