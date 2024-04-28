@@ -22,15 +22,15 @@ jobs:
         id: get-version
         run: |
           VERSION=$(npm show commitlint version)
+          echo $VERSION
           echo "name=commitlint_version::$VERSION" >> $GITHUB_OUTPUT
 
       - name: Get tags from Package registry
         shell: bash
         run: |
-          export GHCR_TOKEN=$(echo ${{ secrets.GITHUB_TOKEN }} | base64)
-          export TAG=${{ steps.get-version.outputs.commitlint_version }}
+          GHCR_TOKEN=$(echo ${{ secrets.GITHUB_TOKEN }} | base64)
+          TAG=${{ steps.get-version.outputs.commitlint_version }}
 
-          echo $GHCR_TOKEN
           echo $TAG
 
           node scripts/has-tag.js
