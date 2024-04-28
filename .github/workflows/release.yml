@@ -2,6 +2,14 @@
 name: Release
 
 on:
+  workflow_call:
+    inputs:
+      commitlint_version:
+        type: string
+        description: "The version of commitlint to use"
+        required: true
+        default: "19.3.0"
+
   workflow_dispatch:
     inputs:
       commitlint_version:
@@ -42,6 +50,8 @@ jobs:
             brpaz/commitlint
           tags: |
             type=raw,enable=true,priority=200,value=${{ env.COMMITLINT_VERSION }}
+            type=raw,value=latest,enable={{is_default_branch}}
+
           labels: |
             org.opencontainers.image.title=Commitlint
             org.opencontainers.image.description=A Docker Image for Commitlint
